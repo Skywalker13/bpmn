@@ -235,12 +235,13 @@ These processes must be created together:
 
 The collaboration of the processes is then implemented in the handlers. For example, it is possible to get a partner process by name and then send an event to this process. This is frequently done to start the partner process:
 
-	exports.Task_2 = function(data, done) {
-    	// after arriving ot "Task 2" we start process 1
-    	var partnerProcess = this.getParticipantByName("My First Process");
-    	partnerProcess.triggerEvent("Start Event 1");
-    	done(data);
-	};
+    exports.Task_2 = function(data, done) {
+        // after arriving ot "Task 2" we start process 1
+        this.getParticipantByName("My First Process", function(err, partnerProcess) {
+            partnerProcess.triggerEvent("Start Event 1");
+            done(data);
+        });
+    };
 
 However, another option is to get all outgoing message flows and send a message along these flows. In the current example we have exactly one flow, so sending the message is done by:
 
