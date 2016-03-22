@@ -2,10 +2,10 @@
 
 exports.Task_2 = function( data , done ){
     // after arriving ot "Task 2" we start process 1
-    var partnerProcess = this.getParticipantByName("My First Process");
-    partnerProcess.triggerEvent("Start Event 1");
-    done(data); 
-	done();
+    this.getParticipantByName("My First Process", function(err, partnerProcess) {
+        partnerProcess.triggerEvent("Start Event 1");
+        done(data);
+    });
 };
 
 
